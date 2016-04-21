@@ -9,13 +9,31 @@
 import UIKit
 import CCAutocomplete
 
-class ViewController: UIViewController,AutocompleteDelegate{
+class ViewController: UIViewController{
 
     @IBOutlet weak var stock_search_label: UILabel!
     @IBOutlet weak var stock_search_field: UITextField!
+    @IBOutlet weak var autocompleteContainerView: UIView!
+    
+    var autoCompleteViewController: AutoCompleteViewController!
+    
+    let countryList = countries
+    
+    var isFirstLoad:Bool = true
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if self.isFirstLoad {
+            self.isFirstLoad = false
+            Autocomplete.setupAutocompleteForViewcontroller(self)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,8 +44,11 @@ class ViewController: UIViewController,AutocompleteDelegate{
     
     
     //MARK: Conform the CCAutocomplete Protocol
+        }
+
+extension ViewController:AutocompleteDelegate{
     func autoCompleteTextField() -> UITextField {
-        return stock_search_field
+        return self.stock_search_field
     }
     
     func autoCompleteThreshold(textField: UITextField) -> Int {
@@ -35,22 +56,26 @@ class ViewController: UIViewController,AutocompleteDelegate{
     }
     
     func autoCompleteItemsForSearchTerm(term: String) -> [AutocompletableOption] {
-        let cell =  AutocompleteCellData(text:  "AAAA", image: nil)
-        let cell2 = AutocompleteCellData(text: "BBBB", image: nil)
-        let cell3 = AutocompleteCellData(text: "CCCC", image: nil)
-        let cell4 = AutocompleteCellData(text: "DDDD", image: nil)
+        let filterTest = self.countryList.filter{(country) -> Bool in
+            return country.lowercaseString.containsString(term.lowercaseString)
+        }
         
-        let test = [cell,cell2, cell3, cell4]
+        let countriesAndFlags: [AutocompletableOption] = filterTest.map { (var country) -> AutocompleteCellData in
+            country.replaceRange(country.startIndex...country.startIndex, with: String(country.characters[country.startIndex]).capitalizedString)
+            return AutocompleteCellData(text: country, image: nil)
+            }.map( { $0 as AutocompletableOption })
         
-        return test
+        return countriesAndFlags
+        
     }
     
     func autoCompleteHeight() -> CGFloat {
-        return 500
+        return CGRectGetHeight(self.view.frame)/3.0
     }
     
     func didSelectItem(item: AutocompletableOption) {
-        stock_search_label.text = item.text
+        self.stock_search_label.text = item.text
     }
-    }
+
+}
 

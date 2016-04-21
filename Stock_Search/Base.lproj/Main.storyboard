@@ -9,6 +9,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Stock_Search" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
@@ -21,16 +22,19 @@
                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="hfH-OJ-tAu">
                                 <rect key="frame" x="25" y="49" width="550" height="103"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stock Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IaH-7s-CQw">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Stock Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IaH-7s-CQw">
                                         <rect key="frame" x="224" y="0.0" width="102" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="heightClass=compact" misplaced="YES">
                                             <rect key="frame" x="224" y="0.0" width="102" height="21"/>
                                         </variation>
+                                        <variation key="heightClass=regular" misplaced="YES">
+                                            <rect key="frame" x="229" y="0.0" width="102" height="21"/>
+                                        </variation>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Stock name or Symbol" textAlignment="center" minimumFontSize="20" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="6nk-Qg-jXT">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Stock name or Symbol" textAlignment="center" minimumFontSize="20" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="6nk-Qg-jXT">
                                         <rect key="frame" x="5" y="34" width="540" height="26"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -41,39 +45,68 @@
                                         <variation key="heightClass=compact" misplaced="YES">
                                             <rect key="frame" x="5" y="34" width="540" height="26"/>
                                         </variation>
+                                        <variation key="heightClass=regular" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="34" width="560" height="26"/>
+                                        </variation>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="maW-sM-0gE">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="maW-sM-0gE">
                                         <rect key="frame" x="240" y="73" width="71" height="30"/>
                                         <state key="normal" title="Get Quote"/>
                                         <variation key="heightClass=compact" misplaced="YES">
                                             <rect key="frame" x="240" y="73" width="71" height="30"/>
                                         </variation>
+                                        <variation key="heightClass=regular" misplaced="YES">
+                                            <rect key="frame" x="245" y="73" width="71" height="30"/>
+                                        </variation>
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="6nk-Qg-jXT" secondAttribute="trailing" constant="5" id="9qn-FD-b2f"/>
-                                    <constraint firstItem="6nk-Qg-jXT" firstAttribute="leading" secondItem="hfH-OJ-tAu" secondAttribute="leading" constant="5" id="gTH-aL-ewm"/>
+                                    <constraint firstItem="6nk-Qg-jXT" firstAttribute="leading" secondItem="hfH-OJ-tAu" secondAttribute="leading" id="2tu-cM-dvV"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="2tu-cM-dvV"/>
+                                    </mask>
+                                </variation>
                                 <variation key="heightClass=compact" misplaced="YES">
                                     <rect key="frame" x="25" y="50" width="550" height="103"/>
+                                </variation>
+                                <variation key="heightClass=regular" misplaced="YES">
+                                    <rect key="frame" x="20" y="50" width="560" height="103"/>
+                                    <mask key="constraints">
+                                        <include reference="2tu-cM-dvV"/>
+                                    </mask>
                                 </variation>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.10196078431372549" green="0.89803921568627454" blue="0.53725490196078429" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="hfH-OJ-tAu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="5" id="6hT-1p-3Oz"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="hfH-OJ-tAu" secondAttribute="trailing" constant="5" id="XFH-BC-Iqz"/>
-                            <constraint firstItem="hfH-OJ-tAu" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="qWd-pS-o5P"/>
+                            <constraint firstItem="hfH-OJ-tAu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="JAK-0D-kQg"/>
+                            <constraint firstItem="hfH-OJ-tAu" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="SPx-hv-iRn"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hfH-OJ-tAu" secondAttribute="trailing" id="Snl-kR-xR4"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="JAK-0D-kQg"/>
+                                <exclude reference="SPx-hv-iRn"/>
+                                <exclude reference="Snl-kR-xR4"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular">
+                            <mask key="constraints">
+                                <include reference="JAK-0D-kQg"/>
+                                <include reference="SPx-hv-iRn"/>
+                                <include reference="Snl-kR-xR4"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="stock_search_field" destination="6nk-Qg-jXT" id="Imv-g5-G08"/>
                         <outlet property="stock_search_label" destination="IaH-7s-CQw" id="3RV-Tv-Ayp"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-248" y="393"/>
+            <point key="canvasLocation" x="201" y="402"/>
         </scene>
     </scenes>
 </document>
