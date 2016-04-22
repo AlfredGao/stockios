@@ -9,104 +9,104 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Stock_Search" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="800"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="hfH-OJ-tAu">
-                                <rect key="frame" x="25" y="49" width="550" height="103"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Stock Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IaH-7s-CQw">
-                                        <rect key="frame" x="224" y="0.0" width="102" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                        <variation key="heightClass=compact" misplaced="YES">
-                                            <rect key="frame" x="224" y="0.0" width="102" height="21"/>
-                                        </variation>
-                                        <variation key="heightClass=regular" misplaced="YES">
-                                            <rect key="frame" x="229" y="0.0" width="102" height="21"/>
-                                        </variation>
-                                    </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Stock name or Symbol" textAlignment="center" minimumFontSize="20" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="6nk-Qg-jXT">
-                                        <rect key="frame" x="5" y="34" width="540" height="26"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="26" id="4de-xD-pJm"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <variation key="heightClass=compact" misplaced="YES">
-                                            <rect key="frame" x="5" y="34" width="540" height="26"/>
-                                        </variation>
-                                        <variation key="heightClass=regular" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="34" width="560" height="26"/>
-                                        </variation>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="maW-sM-0gE">
-                                        <rect key="frame" x="240" y="73" width="71" height="30"/>
-                                        <state key="normal" title="Get Quote"/>
-                                        <variation key="heightClass=compact" misplaced="YES">
-                                            <rect key="frame" x="240" y="73" width="71" height="30"/>
-                                        </variation>
-                                        <variation key="heightClass=regular" misplaced="YES">
-                                            <rect key="frame" x="245" y="73" width="71" height="30"/>
-                                        </variation>
-                                    </button>
-                                </subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Stock Name or Symbol" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Lf-y0-eEn">
+                                <rect key="frame" x="-25" y="-30" width="97" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="6nk-Qg-jXT" firstAttribute="leading" secondItem="hfH-OJ-tAu" secondAttribute="leading" id="2tu-cM-dvV"/>
+                                    <constraint firstAttribute="height" constant="32" id="Kvq-vt-kdV"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="2tu-cM-dvV"/>
+                                        <exclude reference="Kvq-vt-kdV"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=compact" misplaced="YES">
-                                    <rect key="frame" x="25" y="50" width="550" height="103"/>
-                                </variation>
-                                <variation key="heightClass=regular" misplaced="YES">
-                                    <rect key="frame" x="20" y="50" width="560" height="103"/>
+                                <variation key="heightClass=regular">
                                     <mask key="constraints">
-                                        <include reference="2tu-cM-dvV"/>
+                                        <include reference="Kvq-vt-kdV"/>
                                     </mask>
                                 </variation>
-                            </stackView>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LrE-xB-xrT">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Get Quote"/>
+                                <variation key="heightClass=regular" misplaced="YES">
+                                    <rect key="frame" x="221" y="117" width="71" height="30"/>
+                                </variation>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stock Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mud-6V-QFi">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular" misplaced="YES">
+                                    <rect key="frame" x="160" y="48" width="102" height="21"/>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.10196078431372549" green="0.89803921568627454" blue="0.53725490196078429" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="hfH-OJ-tAu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="JAK-0D-kQg"/>
-                            <constraint firstItem="hfH-OJ-tAu" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="SPx-hv-iRn"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="hfH-OJ-tAu" secondAttribute="trailing" id="Snl-kR-xR4"/>
+                            <constraint firstItem="6Lf-y0-eEn" firstAttribute="top" secondItem="Mud-6V-QFi" secondAttribute="bottom" constant="12" id="4hn-2W-vx6"/>
+                            <constraint firstItem="6Lf-y0-eEn" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="9LN-n5-Xf8"/>
+                            <constraint firstItem="Mud-6V-QFi" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="24" id="G90-ki-Cxq"/>
+                            <constraint firstItem="Mud-6V-QFi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="130" id="Qsk-0v-gSm"/>
+                            <constraint firstItem="6Lf-y0-eEn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="TRt-34-nrz"/>
+                            <constraint firstItem="LrE-xB-xrT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="140" id="acm-6v-dM6"/>
+                            <constraint firstItem="LrE-xB-xrT" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="100" id="lLj-Wc-m0n"/>
                         </constraints>
                         <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="6Lf-y0-eEn"/>
+                                <exclude reference="LrE-xB-xrT"/>
+                                <exclude reference="Mud-6V-QFi"/>
+                            </mask>
                             <mask key="constraints">
-                                <exclude reference="JAK-0D-kQg"/>
-                                <exclude reference="SPx-hv-iRn"/>
-                                <exclude reference="Snl-kR-xR4"/>
+                                <exclude reference="4hn-2W-vx6"/>
+                                <exclude reference="9LN-n5-Xf8"/>
+                                <exclude reference="TRt-34-nrz"/>
+                                <exclude reference="G90-ki-Cxq"/>
+                                <exclude reference="Qsk-0v-gSm"/>
+                                <exclude reference="acm-6v-dM6"/>
+                                <exclude reference="lLj-Wc-m0n"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular">
+                            <mask key="subviews">
+                                <include reference="6Lf-y0-eEn"/>
+                                <include reference="LrE-xB-xrT"/>
+                                <include reference="Mud-6V-QFi"/>
+                            </mask>
                             <mask key="constraints">
-                                <include reference="JAK-0D-kQg"/>
-                                <include reference="SPx-hv-iRn"/>
-                                <include reference="Snl-kR-xR4"/>
+                                <include reference="4hn-2W-vx6"/>
+                                <include reference="9LN-n5-Xf8"/>
+                                <include reference="TRt-34-nrz"/>
+                                <include reference="G90-ki-Cxq"/>
+                                <include reference="Qsk-0v-gSm"/>
+                                <include reference="acm-6v-dM6"/>
+                                <include reference="lLj-Wc-m0n"/>
                             </mask>
                         </variation>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="600" height="800"/>
                     <connections>
-                        <outlet property="stock_search_field" destination="6nk-Qg-jXT" id="Imv-g5-G08"/>
-                        <outlet property="stock_search_label" destination="IaH-7s-CQw" id="3RV-Tv-Ayp"/>
+                        <outlet property="Stock_search_field" destination="6Lf-y0-eEn" id="ekQ-Um-7ui"/>
+                        <outlet property="Stock_search_label" destination="Mud-6V-QFi" id="UvG-Mu-Sbx"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="201" y="402"/>
+            <point key="canvasLocation" x="240" y="383.25"/>
         </scene>
     </scenes>
 </document>

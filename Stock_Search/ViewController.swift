@@ -11,9 +11,9 @@ import CCAutocomplete
 
 class ViewController: UIViewController{
 
-    @IBOutlet weak var stock_search_label: UILabel!
-    @IBOutlet weak var stock_search_field: UITextField!
-    @IBOutlet weak var autocompleteContainerView: UIView!
+    @IBOutlet weak var Stock_search_field: UITextField!
+    @IBOutlet weak var Stock_search_label: UILabel!
+    
     
     var autoCompleteViewController: AutoCompleteViewController!
     
@@ -48,7 +48,7 @@ class ViewController: UIViewController{
 
 extension ViewController:AutocompleteDelegate{
     func autoCompleteTextField() -> UITextField {
-        return self.stock_search_field
+        return self.Stock_search_field
     }
     
     func autoCompleteThreshold(textField: UITextField) -> Int {
@@ -74,7 +74,7 @@ extension ViewController:AutocompleteDelegate{
     }
     
     func didSelectItem(item: AutocompletableOption) {
-        self.stock_search_label.text = item.text
+        self.Stock_search_label.text = item.text
     }
 
 }
