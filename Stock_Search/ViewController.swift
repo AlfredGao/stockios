@@ -15,13 +15,12 @@ class ViewController: UIViewController{
     @IBOutlet weak var Stock_search_label: UILabel!
     
     
-    var autoCompleteViewController: AutoCompleteViewController!
+    
     
     let countryList = countries
-    
     var isFirstLoad:Bool = true
-    
-    
+    var alert:UIAlertController!
+    var flag:Int! = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -40,8 +39,23 @@ class ViewController: UIViewController{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    //MARK: Text
+    //MARK: Action
     
+    @IBAction func get_Quote(sender: UIButton) {
+        if Stock_search_field.text == "" {
+            let alert = UIAlertController(title:"Please Enter a Stock Name or Symbol", message:nil, preferredStyle: UIAlertControllerStyle.Alert);
+            showViewController(alert, sender: self)
+            alert.addAction(UIAlertAction(title:"OK", style: UIAlertActionStyle.Cancel, handler :nil))
+            
+            
+        }
+        
+        if flag == 1 {
+            let alert = UIAlertController(title:"Invalid Symbol", message:nil, preferredStyle: UIAlertControllerStyle.Alert)
+            showViewController(alert, sender:self)
+            alert.addAction(UIAlertAction(title:"OK", style: UIAlertActionStyle.Cancel, handler: nil))
+        }
+    }
     
     //MARK: Conform the CCAutocomplete Protocol
         }
@@ -84,6 +98,11 @@ extension ViewController:AutocompleteDelegate{
             let str: String = item["Symbol"]! + "-" + item["Name"]! + "-" + item["Exchange"]!
             showArray += [str];
         }
+        if showArray.isEmpty{
+            self.Stock_search_label.text = "Empty"
+            self.flag = 1;
+        }
+        
         print(showArray)
         
         let completeArray: [AutocompletableOption] = showArray.map { showText -> AutocompleteCellData in

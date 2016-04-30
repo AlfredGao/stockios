@@ -38,16 +38,22 @@
                                     </mask>
                                 </variation>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LrE-xB-xrT">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <state key="normal" title="Get Quote"/>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stock Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mud-6V-QFi">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LrE-xB-xrT">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Get Quote"/>
+                                <variation key="heightClass=regular" misplaced="YES">
+                                    <rect key="frame" x="160" y="117" width="71" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="get_Quote:" destination="BYZ-38-t0r" eventType="touchUpInside" id="v1N-ge-N9F"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.10196078431372549" green="0.89803921568627454" blue="0.53725490196078429" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -62,8 +68,8 @@
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="6Lf-y0-eEn"/>
-                                <exclude reference="LrE-xB-xrT"/>
                                 <exclude reference="Mud-6V-QFi"/>
+                                <exclude reference="LrE-xB-xrT"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="4hn-2W-vx6"/>
@@ -78,8 +84,8 @@
                         <variation key="heightClass=regular">
                             <mask key="subviews">
                                 <include reference="6Lf-y0-eEn"/>
-                                <include reference="LrE-xB-xrT"/>
                                 <include reference="Mud-6V-QFi"/>
+                                <include reference="LrE-xB-xrT"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="4hn-2W-vx6"/>
@@ -101,7 +107,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="240" y="383.25"/>
+            <point key="canvasLocation" x="-292" y="331.5"/>
         </scene>
     </scenes>
 </document>
