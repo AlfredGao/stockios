@@ -52,20 +52,46 @@ extension ViewController:AutocompleteDelegate{
     }
     
     func autoCompleteThreshold(textField: UITextField) -> Int {
-        return 1
+        return 2
     }
     
     func autoCompleteItemsForSearchTerm(term: String) -> [AutocompletableOption] {
-        let filterTest = self.countryList.filter{(country) -> Bool in
-            return country.lowercaseString.containsString(term.lowercaseString)
-        }
+        let url :String =  "http://socketsearch-1272.appspot.com/index.php?input=" + term
+        let googleUrl = NSURL(string: url)!
+        var jsonArray = [[String:String]]()
+        let semaphore = dispatch_semaphore_create(0)
         
-        let countriesAndFlags: [AutocompletableOption] = filterTest.map { (var country) -> AutocompleteCellData in
-            country.replaceRange(country.startIndex...country.startIndex, with: String(country.characters[country.startIndex]).capitalizedString)
-            return AutocompleteCellData(text: country, image: nil)
+        let session = NSURLSession.sharedSession()
+        session.dataTaskWithURL(googleUrl, completionHandler:
+            {( data: NSData?, response:NSURLResponse?, error:NSError?) -> Void in
+                do {
+                    if let getString = NSString(data:data!, encoding: NSUTF8StringEncoding) {
+                        jsonArray = try NSJSONSerialization.JSONObjectWithData(
+                            data!, options:.AllowFragments)as! [[String:String]]
+                        dispatch_semaphore_signal(semaphore)
+                        
+                    }
+                } catch {
+                    print(error)
+                }
+        }).resume()
+        
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
+        
+        var showArray = [String]()
+        for item in jsonArray {
+            print(item)
+            let str: String = item["Symbol"]! + "-" + item["Name"]! + "-" + item["Exchange"]!
+            showArray += [str];
+        }
+        print(showArray)
+        
+        let completeArray: [AutocompletableOption] = showArray.map { showText -> AutocompleteCellData in
+            
+            return AutocompleteCellData(text: showText, image: nil)
             }.map( { $0 as AutocompletableOption })
         
-        return countriesAndFlags
+        return completeArray
         
     }
     

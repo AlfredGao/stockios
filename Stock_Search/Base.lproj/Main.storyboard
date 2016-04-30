@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -40,18 +41,12 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LrE-xB-xrT">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <state key="normal" title="Get Quote"/>
-                                <variation key="heightClass=regular" misplaced="YES">
-                                    <rect key="frame" x="221" y="117" width="71" height="30"/>
-                                </variation>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stock Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mud-6V-QFi">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular" misplaced="YES">
-                                    <rect key="frame" x="160" y="48" width="102" height="21"/>
-                                </variation>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.10196078431372549" green="0.89803921568627454" blue="0.53725490196078429" alpha="1" colorSpace="calibratedRGB"/>
@@ -74,10 +69,10 @@
                                 <exclude reference="4hn-2W-vx6"/>
                                 <exclude reference="9LN-n5-Xf8"/>
                                 <exclude reference="TRt-34-nrz"/>
-                                <exclude reference="G90-ki-Cxq"/>
-                                <exclude reference="Qsk-0v-gSm"/>
                                 <exclude reference="acm-6v-dM6"/>
                                 <exclude reference="lLj-Wc-m0n"/>
+                                <exclude reference="G90-ki-Cxq"/>
+                                <exclude reference="Qsk-0v-gSm"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular">
@@ -90,10 +85,10 @@
                                 <include reference="4hn-2W-vx6"/>
                                 <include reference="9LN-n5-Xf8"/>
                                 <include reference="TRt-34-nrz"/>
-                                <include reference="G90-ki-Cxq"/>
-                                <include reference="Qsk-0v-gSm"/>
                                 <include reference="acm-6v-dM6"/>
                                 <include reference="lLj-Wc-m0n"/>
+                                <include reference="G90-ki-Cxq"/>
+                                <include reference="Qsk-0v-gSm"/>
                             </mask>
                         </variation>
                     </view>
