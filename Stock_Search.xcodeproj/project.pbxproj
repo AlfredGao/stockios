@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		174210095613F5E9CB27A4E8 /* Pods_Stock_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7CCC90CDB3A0D7F2E8E1BD9 /* Pods_Stock_Search.framework */; };
+		341E60431CD5E33300C17752 /* PageDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341E60421CD5E33300C17752 /* PageDetail.swift */; };
 		343CCED21CC8052A0007113C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343CCED11CC8052A0007113C /* AppDelegate.swift */; };
 		343CCED41CC8052A0007113C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343CCED31CC8052A0007113C /* ViewController.swift */; };
 		343CCED71CC8052A0007113C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 343CCED51CC8052A0007113C /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		341E60421CD5E33300C17752 /* PageDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageDetail.swift; sourceTree = "<group>"; };
 		343CCECE1CC8052A0007113C /* Stock_Search.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stock_Search.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		343CCED11CC8052A0007113C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		343CCED31CC8052A0007113C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 			children = (
 				343CCED11CC8052A0007113C /* AppDelegate.swift */,
 				343CCED31CC8052A0007113C /* ViewController.swift */,
+				341E60421CD5E33300C17752 /* PageDetail.swift */,
 				343CCED51CC8052A0007113C /* Main.storyboard */,
 				343CCEDB1CC8052A0007113C /* Assets.xcassets */,
 				343CCEDD1CC8052A0007113C /* LaunchScreen.storyboard */,
@@ -338,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				343CCED41CC8052A0007113C /* ViewController.swift in Sources */,
+				341E60431CD5E33300C17752 /* PageDetail.swift in Sources */,
 				343CCEDA1CC8052A0007113C /* Stock_Search.xcdatamodeld in Sources */,
 				343CCED21CC8052A0007113C /* AppDelegate.swift in Sources */,
 				346818441CC9522100472B45 /* testAutoComplete.swift in Sources */,

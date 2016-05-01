@@ -24,6 +24,7 @@ class ViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.navigationController?.navigationBar.hidden = true
     }
     
     override func viewDidLayoutSubviews() {
@@ -43,7 +44,7 @@ class ViewController: UIViewController{
     
     @IBAction func get_Quote(sender: UIButton) {
         if Stock_search_field.text == "" {
-            let alert = UIAlertController(title:"Please Enter a Stock Name or Symbol", message:nil, preferredStyle: UIAlertControllerStyle.Alert);
+            let alert = UIAlertController(title:"Please Enter a Stock Name or Symbol.", message:nil, preferredStyle: UIAlertControllerStyle.Alert);
             showViewController(alert, sender: self)
             alert.addAction(UIAlertAction(title:"OK", style: UIAlertActionStyle.Cancel, handler :nil))
             
@@ -99,7 +100,6 @@ extension ViewController:AutocompleteDelegate{
             showArray += [str];
         }
         if showArray.isEmpty{
-            self.Stock_search_label.text = "Empty"
             self.flag = 1;
         }
         
@@ -119,7 +119,49 @@ extension ViewController:AutocompleteDelegate{
     }
     
     func didSelectItem(item: AutocompletableOption) {
-        self.Stock_search_label.text = item.text
+        print(item.text[item.text.startIndex])
+        var splashIndex = 1;
+        
+        while item.text[item.text.startIndex.advancedBy(splashIndex)] != "-"{
+            splashIndex += 1
+        }
+        
+        print(splashIndex)
+        
+        let symbolName = item.text.substringToIndex(item.text.startIndex.advancedBy(splashIndex))
+        
+        print(symbolName)
+        
+        let url:String = "http://socketsearch-1272.appspot.com/?api=lookup&symbol=" + symbolName
+        
+        print(url)
+        
+        var detailArray = httpRequest(url)
+        
+        print(detailArray)
+        
+    }
+    
+    func httpRequest(url:String) -> [String:AnyObject] {
+        let connectUrl = NSURL(string: url)!
+        var jsonArray = [String:AnyObject]()
+        let semaphore = dispatch_semaphore_create(0)
+        
+        let session = NSURLSession.sharedSession()
+        session.dataTaskWithURL(connectUrl,completionHandler:
+            {( data: NSData?, response:NSURLResponse?, error:NSError?) -> Void in
+                do{
+                    if let getString = NSString(data:data!, encoding: NSUTF8StringEncoding) {
+                        jsonArray = try NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments)as! [String:AnyObject]
+                        dispatch_semaphore_signal(semaphore)
+                    }
+                } catch {
+                    print(error)
+                }
+        }).resume()
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
+        return jsonArray
+        
     }
 
 }

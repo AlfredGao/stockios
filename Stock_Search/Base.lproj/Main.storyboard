@@ -48,10 +48,11 @@
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <state key="normal" title="Get Quote"/>
                                 <variation key="heightClass=regular" misplaced="YES">
-                                    <rect key="frame" x="160" y="117" width="71" height="30"/>
+                                    <rect key="frame" x="152" y="117" width="71" height="30"/>
                                 </variation>
                                 <connections>
                                     <action selector="get_Quote:" destination="BYZ-38-t0r" eventType="touchUpInside" id="v1N-ge-N9F"/>
+                                    <segue destination="bXF-TV-iHE" kind="show" id="gD4-gJ-Smu"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -98,8 +99,8 @@
                             </mask>
                         </variation>
                     </view>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="600" height="800"/>
+                    <navigationItem key="navigationItem" id="uNx-WC-Zye"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="Stock_search_field" destination="6Lf-y0-eEn" id="ekQ-Um-7ui"/>
                         <outlet property="Stock_search_label" destination="Mud-6V-QFi" id="UvG-Mu-Sbx"/>
@@ -107,7 +108,57 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-292" y="331.5"/>
+            <point key="canvasLocation" x="1605.5" y="286.875"/>
+        </scene>
+        <!--Page Detail-->
+        <scene sceneID="OJI-a1-ftg">
+            <objects>
+                <viewController id="jHa-05-PeV" customClass="PageDetail" customModule="Stock_Search" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oax-eM-ktY"/>
+                        <viewControllerLayoutGuide type="bottom" id="LaQ-HJ-Dfy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="h62-aJ-Hmh" customClass="detailPage">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="PK1-n7-piS">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="NHs-Cy-Mk7"/>
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="5Ua-SX-zR9">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5hO-mY-EoN">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="mcc-n6-r0p"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BAb-eQ-I5E" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2568.5" y="286.875"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="VOZ-j4-V8q">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bXF-TV-iHE" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="OKM-Cr-dge">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="jHa-05-PeV" kind="relationship" relationship="rootViewController" id="aDr-Qk-QeO"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fXW-jd-fSH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2096.5" y="286.875"/>
         </scene>
     </scenes>
 </document>
