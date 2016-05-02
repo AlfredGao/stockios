@@ -21,6 +21,9 @@ class ViewController: UIViewController{
     var isFirstLoad:Bool = true
     var alert:UIAlertController!
     var flag:Int! = 0
+    var detailArray = [String:AnyObject]()
+    var searchFieldCheck: Bool! = false
+    var symbolName = String()
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -40,26 +43,99 @@ class ViewController: UIViewController{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    //MARK: Action
+    
+        //MARK: Action
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(true)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
     
     @IBAction func get_Quote(sender: UIButton) {
-        if Stock_search_field.text == "" {
-            let alert = UIAlertController(title:"Please Enter a Stock Name or Symbol.", message:nil, preferredStyle: UIAlertControllerStyle.Alert);
-            showViewController(alert, sender: self)
-            alert.addAction(UIAlertAction(title:"OK", style: UIAlertActionStyle.Cancel, handler :nil))
+        
+        if Stock_search_field.text == "" || Stock_search_field.text == nil {
+            let alert = UIAlertController(
+                title:"Please Enter a Stock Name or Symbol.",
+                message:nil,
+                preferredStyle: UIAlertControllerStyle.Alert)
             
+            
+             alert.addAction(UIAlertAction(
+                title:"OK",
+                style: UIAlertActionStyle.Cancel,
+                handler: nil))
+            
+            self.presentViewController(alert, animated: true, completion: nil)
             
         }
         
-        if flag == 1 {
+        
+        else if flag == 1 {
+             let alert = UIAlertController(
+                title:"Invalid Symbol",
+                message:nil,
+                preferredStyle: UIAlertControllerStyle.Alert)
+            
+             alert.addAction(UIAlertAction(
+                title:"OK",
+                style: UIAlertActionStyle.Cancel,
+                handler: nil))
+            
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+
+        }
+        
+        else {
+            
+            let url:String = "http://socketsearch-1272.appspot.com/?api=lookup&symbol=" + symbolName
+        
+            detailArray = httpRequest(url)
+        
+            print(detailArray)
+            
+            searchFieldCheck = true
+        }
+        
+        
+
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+       
+            var detailController: PageDetail = segue.destinationViewController as! PageDetail
+            detailController.detailText = detailArray
+    
+    }
+    
+    /*override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        if searchFieldCheck == false {
+            /*let alert = UIAlertController(title:"Please Enter a Stock Name or Symbol.", message:nil, preferredStyle: UIAlertControllerStyle.Alert)
+            showViewController(alert, sender:self)
+            alert.addAction(UIAlertAction(title:"OK", style: UIAlertActionStyle.Cancel, handler: nil))*/
+            return false
+        }
+        
+        
+        /*if flag == 1 {
             let alert = UIAlertController(title:"Invalid Symbol", message:nil, preferredStyle: UIAlertControllerStyle.Alert)
             showViewController(alert, sender:self)
             alert.addAction(UIAlertAction(title:"OK", style: UIAlertActionStyle.Cancel, handler: nil))
-        }
-    }
+            return false
+        }*/
+        
+        return true
+    
+    }*/
+    
+    
     
     //MARK: Conform the CCAutocomplete Protocol
-        }
+}
 
 extension ViewController:AutocompleteDelegate{
     func autoCompleteTextField() -> UITextField {
@@ -99,6 +175,7 @@ extension ViewController:AutocompleteDelegate{
             let str: String = item["Symbol"]! + "-" + item["Name"]! + "-" + item["Exchange"]!
             showArray += [str];
         }
+        self.flag = 0
         if showArray.isEmpty{
             self.flag = 1;
         }
@@ -131,14 +208,7 @@ extension ViewController:AutocompleteDelegate{
         let symbolName = item.text.substringToIndex(item.text.startIndex.advancedBy(splashIndex))
         
         print(symbolName)
-        
-        let url:String = "http://socketsearch-1272.appspot.com/?api=lookup&symbol=" + symbolName
-        
-        print(url)
-        
-        var detailArray = httpRequest(url)
-        
-        print(detailArray)
+        self.symbolName = symbolName
         
     }
     

@@ -10,7 +10,12 @@ import Foundation
 import UIKit
 
 class PageDetail : UIViewController {
+    
+    var detailText = [String:AnyObject]()
+    
     override func viewDidLoad() {
-        self.navigationController?.navigationBar.hidden = false
+        
+        print(detailText)
     }
+    
 }
