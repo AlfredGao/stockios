@@ -29,6 +29,7 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
     @IBOutlet weak var Detail_Segment: UISegmentedControl!
     
     // MARK: TableView Data Source Methods
+    @IBOutlet weak var chartImg: UIImageView!
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -190,7 +191,18 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
         chart_View.loadRequest(NSURLRequest(URL:NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("webView/stock_chart_app", ofType: "html")!)))
         
         scrollView.contentSize = CGSizeMake(400, 1200)
-
+        
+        var SymbolName = String()
+        SymbolName = detailText["Symbol"] as! String
+        
+        let imgUrl = "http://chart.finance.yahoo.com/t?s=" + SymbolName + "&lang=en-US&width=352&height=264"
+        if let URL = NSURL(string: imgUrl) {
+            if let imgData = NSData(contentsOfURL: URL) {
+                chartImg.image = UIImage(data: imgData)
+            }
+        }
+        
+        print(imgUrl)
     }
     
     override func viewDidLayoutSubviews() {
