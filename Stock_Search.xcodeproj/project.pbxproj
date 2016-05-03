@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		174210095613F5E9CB27A4E8 /* Pods_Stock_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7CCC90CDB3A0D7F2E8E1BD9 /* Pods_Stock_Search.framework */; };
 		341E60431CD5E33300C17752 /* PageDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341E60421CD5E33300C17752 /* PageDetail.swift */; };
+		341EC6231CD8227900665452 /* newsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341EC6221CD8227900665452 /* newsCell.swift */; };
 		343CCED21CC8052A0007113C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343CCED11CC8052A0007113C /* AppDelegate.swift */; };
 		343CCED41CC8052A0007113C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343CCED31CC8052A0007113C /* ViewController.swift */; };
 		343CCED71CC8052A0007113C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 343CCED51CC8052A0007113C /* Main.storyboard */; };
@@ -18,6 +19,9 @@
 		343CCEEA1CC8052A0007113C /* Stock_SearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343CCEE91CC8052A0007113C /* Stock_SearchTests.swift */; };
 		343CCEF51CC8052A0007113C /* Stock_SearchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343CCEF41CC8052A0007113C /* Stock_SearchUITests.swift */; };
 		346818441CC9522100472B45 /* testAutoComplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346818431CC9522100472B45 /* testAutoComplete.swift */; };
+		34C8DC901CD8956300F2B01F /* icon in Resources */ = {isa = PBXBuildFile; fileRef = 34C8DC8F1CD8956300F2B01F /* icon */; };
+		34D1422E1CD850B800FA10E6 /* webView in Resources */ = {isa = PBXBuildFile; fileRef = 34D1422D1CD850B800FA10E6 /* webView */; };
+		34D142401CD8735400FA10E6 /* detailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D1423F1CD8735400FA10E6 /* detailCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		341E60421CD5E33300C17752 /* PageDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageDetail.swift; sourceTree = "<group>"; };
+		341EC6221CD8227900665452 /* newsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = newsCell.swift; sourceTree = "<group>"; };
 		343CCECE1CC8052A0007113C /* Stock_Search.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stock_Search.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		343CCED11CC8052A0007113C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		343CCED31CC8052A0007113C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +59,9 @@
 		343CCEF41CC8052A0007113C /* Stock_SearchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stock_SearchUITests.swift; sourceTree = "<group>"; };
 		343CCEF61CC8052A0007113C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		346818431CC9522100472B45 /* testAutoComplete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testAutoComplete.swift; sourceTree = "<group>"; };
+		34C8DC8F1CD8956300F2B01F /* icon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = icon; sourceTree = "<group>"; };
+		34D1422D1CD850B800FA10E6 /* webView */ = {isa = PBXFileReference; lastKnownFileType = folder; path = webView; sourceTree = "<group>"; };
+		34D1423F1CD8735400FA10E6 /* detailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = detailCell.swift; sourceTree = "<group>"; };
 		37D47B62038D8EB351CDD4E1 /* Pods-Stock_Search.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stock_Search.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stock_Search/Pods-Stock_Search.debug.xcconfig"; sourceTree = "<group>"; };
 		BB76C3F8A8CD02AC45E3F0F3 /* Pods-Stock_Search.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stock_Search.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stock_Search/Pods-Stock_Search.release.xcconfig"; sourceTree = "<group>"; };
 		F7CCC90CDB3A0D7F2E8E1BD9 /* Pods_Stock_Search.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stock_Search.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +120,8 @@
 			children = (
 				343CCED11CC8052A0007113C /* AppDelegate.swift */,
 				343CCED31CC8052A0007113C /* ViewController.swift */,
+				34D1423F1CD8735400FA10E6 /* detailCell.swift */,
+				341EC6221CD8227900665452 /* newsCell.swift */,
 				341E60421CD5E33300C17752 /* PageDetail.swift */,
 				343CCED51CC8052A0007113C /* Main.storyboard */,
 				343CCEDB1CC8052A0007113C /* Assets.xcassets */,
@@ -119,6 +129,8 @@
 				343CCEE01CC8052A0007113C /* Info.plist */,
 				343CCED81CC8052A0007113C /* Stock_Search.xcdatamodeld */,
 				346818431CC9522100472B45 /* testAutoComplete.swift */,
+				34C8DC8F1CD8956300F2B01F /* icon */,
+				34D1422D1CD850B800FA10E6 /* webView */,
 			);
 			path = Stock_Search;
 			sourceTree = "<group>";
@@ -265,6 +277,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34D1422E1CD850B800FA10E6 /* webView in Resources */,
+				34C8DC901CD8956300F2B01F /* icon in Resources */,
 				343CCEDF1CC8052A0007113C /* LaunchScreen.storyboard in Resources */,
 				343CCEDC1CC8052A0007113C /* Assets.xcassets in Resources */,
 				343CCED71CC8052A0007113C /* Main.storyboard in Resources */,
@@ -340,7 +354,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				341EC6231CD8227900665452 /* newsCell.swift in Sources */,
 				343CCED41CC8052A0007113C /* ViewController.swift in Sources */,
+				34D142401CD8735400FA10E6 /* detailCell.swift in Sources */,
 				341E60431CD5E33300C17752 /* PageDetail.swift in Sources */,
 				343CCEDA1CC8052A0007113C /* Stock_Search.xcdatamodeld in Sources */,
 				343CCED21CC8052A0007113C /* AppDelegate.swift in Sources */,

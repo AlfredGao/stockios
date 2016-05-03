@@ -22,6 +22,7 @@ class ViewController: UIViewController{
     var alert:UIAlertController!
     var flag:Int! = 0
     var detailArray = [String:AnyObject]()
+    var newArray = [String:AnyObject]()
     var searchFieldCheck: Bool! = false
     var symbolName = String()
     override func viewDidLoad() {
@@ -93,11 +94,10 @@ class ViewController: UIViewController{
         else {
             
             let url:String = "http://socketsearch-1272.appspot.com/?api=lookup&symbol=" + symbolName
-        
+            let newUrl:String = "http://socketsearch-1272.appspot.com/index.php?symbol_name=" + symbolName
             detailArray = httpRequest(url)
-        
+            newArray = httpRequest(newUrl)
             print(detailArray)
-            
             searchFieldCheck = true
         }
         
@@ -109,7 +109,7 @@ class ViewController: UIViewController{
        
             var detailController: PageDetail = segue.destinationViewController as! PageDetail
             detailController.detailText = detailArray
-    
+            detailController.newText = newArray
     }
     
     /*override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
