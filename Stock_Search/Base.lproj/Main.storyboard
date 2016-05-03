@@ -259,14 +259,14 @@
                                                             <exclude reference="WOi-Zs-Bfe"/>
                                                             <exclude reference="bcL-YM-G0f"/>
                                                             <exclude reference="bqa-gv-vCP"/>
-                                                            <exclude reference="6hR-30-wfp"/>
-                                                            <exclude reference="J6n-YI-UYB"/>
-                                                            <exclude reference="wnE-RH-sBX"/>
+                                                            <exclude reference="Gv0-Ib-Moy"/>
+                                                            <exclude reference="fEX-Ws-TYY"/>
                                                             <exclude reference="1Yb-Wt-sIf"/>
                                                             <exclude reference="Ye0-WT-TXt"/>
                                                             <exclude reference="xQm-ME-0Ch"/>
-                                                            <exclude reference="Gv0-Ib-Moy"/>
-                                                            <exclude reference="fEX-Ws-TYY"/>
+                                                            <exclude reference="6hR-30-wfp"/>
+                                                            <exclude reference="J6n-YI-UYB"/>
+                                                            <exclude reference="wnE-RH-sBX"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular">
@@ -282,14 +282,14 @@
                                                             <include reference="WOi-Zs-Bfe"/>
                                                             <include reference="bcL-YM-G0f"/>
                                                             <include reference="bqa-gv-vCP"/>
-                                                            <include reference="6hR-30-wfp"/>
-                                                            <include reference="J6n-YI-UYB"/>
-                                                            <include reference="wnE-RH-sBX"/>
+                                                            <include reference="Gv0-Ib-Moy"/>
+                                                            <include reference="fEX-Ws-TYY"/>
                                                             <include reference="1Yb-Wt-sIf"/>
                                                             <include reference="Ye0-WT-TXt"/>
                                                             <include reference="xQm-ME-0Ch"/>
-                                                            <include reference="Gv0-Ib-Moy"/>
-                                                            <include reference="fEX-Ws-TYY"/>
+                                                            <include reference="6hR-30-wfp"/>
+                                                            <include reference="J6n-YI-UYB"/>
+                                                            <include reference="wnE-RH-sBX"/>
                                                         </mask>
                                                     </variation>
                                                 </tableViewCellContentView>
@@ -363,7 +363,14 @@
                                             <rect key="frame" x="256" y="89" width="46" height="30"/>
                                         </variation>
                                     </button>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EIu-T6-HjB" userLabel="Detail_View">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ex-Da-OJN">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <variation key="heightClass=regular" fixedFrame="YES">
+                                            <rect key="frame" x="244" y="89" width="46" height="30"/>
+                                        </variation>
+                                    </button>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EIu-T6-HjB" userLabel="Detail_View">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -371,17 +378,6 @@
                                                 <variation key="heightClass=regular" constant="453"/>
                                             </constraint>
                                         </constraints>
-                                        <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stock Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cxm-Dk-cWp">
-                                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <imageView key="tableFooterView" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down.png" id="Mll-jm-oiu">
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="detailCell" id="hsp-D3-Cut" customClass="detailCell" customModule="Stock_Search" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -495,8 +491,7 @@
                                                 <exclude reference="TML-cJ-sre"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular" misplaced="YES">
-                                            <rect key="frame" x="8" y="68" width="352" height="468"/>
+                                        <variation key="heightClass=regular">
                                             <mask key="constraints">
                                                 <include reference="TML-cJ-sre"/>
                                             </mask>
@@ -538,6 +533,7 @@
                                         <exclude reference="yTD-kU-iQs"/>
                                         <exclude reference="Tei-zu-L0y"/>
                                         <exclude reference="oZY-x6-xQf"/>
+                                        <exclude reference="0ex-Da-OJN"/>
                                         <exclude reference="EIu-T6-HjB"/>
                                     </mask>
                                     <mask key="constraints">
@@ -569,6 +565,7 @@
                                         <include reference="yTD-kU-iQs"/>
                                         <include reference="Tei-zu-L0y"/>
                                         <include reference="oZY-x6-xQf"/>
+                                        <include reference="0ex-Da-OJN"/>
                                         <include reference="EIu-T6-HjB"/>
                                     </mask>
                                     <mask key="constraints">
@@ -668,6 +665,5 @@
     <resources>
         <image name="Facebook Filled-50.png" width="50" height="50"/>
         <image name="Star-50.png" width="50" height="50"/>
-        <image name="down.png" width="52" height="52"/>
     </resources>
 </document>

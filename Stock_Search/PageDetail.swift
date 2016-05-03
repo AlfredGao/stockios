@@ -188,7 +188,14 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
         
         chart_View.delegate = self
         chart_View.loadRequest(NSURLRequest(URL:NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("webView/stock_chart_app", ofType: "html")!)))
+        
+        scrollView.contentSize = CGSizeMake(400, 1200)
 
+    }
+    
+    override func viewDidLayoutSubviews() {
+        scrollView.scrollEnabled = true
+        scrollView.contentSize = CGSizeMake(400, 1200)
     }
     
     func webViewDidFinishLoad(webView: UIWebView) {
