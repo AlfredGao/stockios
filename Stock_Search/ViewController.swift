@@ -8,15 +8,17 @@
 
 import UIKit
 import CCAutocomplete
+import CoreData
 
-class ViewController: UIViewController{
+class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource{
 
     @IBOutlet weak var Stock_search_field: UITextField!
     @IBOutlet weak var Stock_search_label: UILabel!
+    @IBOutlet weak var favView: UITableView!
     
     
-    
-    
+    let addDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    var favItemArray = [NSManagedObject]()
     let countryList = countries
     var isFirstLoad:Bool = true
     var alert:UIAlertController!
@@ -29,6 +31,20 @@ class ViewController: UIViewController{
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationController?.navigationBar.hidden = true
+        
+        let managedContext = addDelegate.managedObjectContext
+        
+        let fetchRequest = NSFetchRequest(entityName: "FavEntity")
+        
+        do {
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            
+            favItemArray = results as! [NSManagedObject]
+            
+        } catch {
+            print(error)
+        }
+        print(favItemArray.count)
     }
     
     override func viewDidLayoutSubviews() {
@@ -43,18 +59,122 @@ class ViewController: UIViewController{
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        
     }
     
         //MARK: Action
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        let managedContext = addDelegate.managedObjectContext
+        
+        let fetchRequest = NSFetchRequest(entityName: "FavEntity")
+        
+        do {
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            
+            favItemArray = results as! [NSManagedObject]
+            
+        } catch {
+            print(error)
+        }
+        print(favItemArray.count)
+        
+        let managedContext1 = addDelegate.managedObjectContext
+        
+        let fetchRequest1 = NSFetchRequest(entityName: "FavEntity")
+        
+        do {
+            let results = try managedContext1.executeFetchRequest(fetchRequest1)
+            
+            favItemArray = results as! [NSManagedObject]
+            
+        } catch {
+            print(error)
+        }
+        print(favItemArray.count)
+        
+        favView.reloadData()
+
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(true)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
     }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return favItemArray.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let favcell = tableView.dequeueReusableCellWithIdentifier("favCell") as! favCell
+        
+        var favObjArray = [NSManagedObject]()
+        favObjArray = favItemArray as! [NSManagedObject]
+        if let name = favObjArray[indexPath.row].valueForKey("company_name") {
+            favcell.changeLabel.text = favObjArray[indexPath.row].valueForKey("change") as! String
+            favcell.marketcapLabel.text = favObjArray[indexPath.row].valueForKey("marketcap") as! String
+            favcell.nameLabel.text = favObjArray[indexPath.row].valueForKey("company_name") as! String
+            favcell.priceLabel.text = favObjArray[indexPath.row].valueForKey("price") as! String
+            favcell.symbolLabel.text = favObjArray[indexPath.row].valueForKey("symbol") as! String
+            
+            if favObjArray[indexPath.row].valueForKey("updown") as! Bool == true {
+                favcell.changeLabel.backgroundColor = UIColor.greenColor()
+            } else {
+                favcell.changeLabel.backgroundColor = UIColor.redColor()
+            }
+            
+        }
+        
+        return favcell
+    }
+    
+     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
+     {
+        if editingStyle == .Delete {
+            var name = String()
+            let obj:NSManagedObject = favItemArray[indexPath.row] as! NSManagedObject
+            name = obj.valueForKey("company_name") as! String
+            favItemArray.removeAtIndex(indexPath.row)
+            favView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Bottom)
+            
+            let managedContext = addDelegate.managedObjectContext
+            
+            let fetchRequest = NSFetchRequest(entityName: "FavEntity")
+            
+            do {
+                
+                
+                let results = try managedContext.executeFetchRequest(fetchRequest)
+                
+                let favItemDelArray = results as! [NSManagedObject]
+                var index:Int = 0;
+                for item in favItemDelArray {
+                    if let nameCheck = item.valueForKey("company_name") {
+                        if  name == item.valueForKey("company_name") as! String {
+                            managedContext.deleteObject(item)
+                            do {
+                                try managedContext.save()
+                            } catch {
+                                print("error")
+                            }
+                        }
+                        
+                    }
+                    index += 1
+                }
+                
+            } catch {
+                print("Error")
+            }
+            //end of Del in Core data
+            favView.reloadData()
+        }
+    }
+    
     
     @IBAction func get_Quote(sender: UIButton) {
         

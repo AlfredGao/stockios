@@ -8,13 +8,17 @@
 
 import Foundation
 import UIKit
-
+import CoreData
 class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate, UIWebViewDelegate{
     
+    
+    var favItemArray = [NSManagedObject]()
     var newText = [String:AnyObject]()
     var detailText = [String:AnyObject]()
     var showTitleArray = ["Name","Symbol","Last Price", "Change", "Time and Date","Market Cap","Volume","Change YTD","High Price","Low Price","Opening Price"]
     var showDetailArray=[String]()
+    var isFavCheck = Bool()
+    let addDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
     
     
@@ -28,8 +32,10 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
     
     @IBOutlet weak var Detail_Segment: UISegmentedControl!
     
+    @IBOutlet weak var favButton: UIButton!
     // MARK: TableView Data Source Methods
     @IBOutlet weak var chartImg: UIImageView!
+    @IBOutlet weak var charImgf: UIImageView!
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -41,7 +47,20 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
         }
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let subNew = newText["d"]!
+        let subNewresult = subNew["results"]!
+        let subArray = subNewresult![indexPath.row]
+        let link = subArray["Url"] as! String
+        
+        if let url = NSURL(string: link) {
+            UIApplication.sharedApplication().openURL(url)
+        }
+        print(link)
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let defaultV = UITableViewCell()
         if tableView == self.Detail_View {
             let cell = Detail_View.dequeueReusableCellWithIdentifier("detailCell") as! detailCell
             cell.detail_Label.text = showTitleArray[indexPath.row]
@@ -67,7 +86,7 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
 
             }
             return cell
-        } else {
+        } else if tableView == self.New_View {
             let cell = New_View.dequeueReusableCellWithIdentifier("newsCell") as! newsCell
             let subNew = newText["d"]!
             let subNewresult = subNew["results"]!
@@ -83,6 +102,8 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
             cell.NewsDate.text = dateStr
             return cell
         }
+        
+        return defaultV
         
     }
     func transferTime(item:String) -> String {
@@ -190,7 +211,7 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
         chart_View.delegate = self
         chart_View.loadRequest(NSURLRequest(URL:NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("webView/stock_chart_app", ofType: "html")!)))
         
-        scrollView.contentSize = CGSizeMake(400, 1200)
+        scrollView.contentSize = CGSizeMake(375, 1200)
         
         var SymbolName = String()
         SymbolName = detailText["Symbol"] as! String
@@ -198,12 +219,74 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
         let imgUrl = "http://chart.finance.yahoo.com/t?s=" + SymbolName + "&lang=en-US&width=352&height=264"
         if let URL = NSURL(string: imgUrl) {
             if let imgData = NSData(contentsOfURL: URL) {
-                chartImg.image = UIImage(data: imgData)
+                charImgf.image = UIImage(data: imgData)
             }
         }
         
-        print(imgUrl)
+        print(checkInFav())
+        
+        if checkInFav(){
+            isFavCheck = true
+//            let img = UIImage(named:"icon/Star-50.png")! as UIImage
+            self.favButton.setBackgroundImage(UIImage(named:"icon/fb.png"), forState: UIControlState.Normal)
+        }else {
+            isFavCheck = false
+            let img = UIImage(named:"icon/Star-50.png")! as UIImage
+            self.favButton.setBackgroundImage(img, forState: UIControlState.Normal)
+        }
+        
+        //let addDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        //let managedContext = addDelegate.managedObjectContext
+        
+        //delAll()
+        print(newText)
+        
     }
+    
+    
+    
+    func delAll() {
+        let img = UIImage(named:"icon/Star-50.png")! as UIImage
+        
+        self.favButton.setBackgroundImage(img, forState: UIControlState.Normal)
+        
+        //let addDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = addDelegate.managedObjectContext
+        
+        let fetchRequest = NSFetchRequest(entityName: "FavEntity")
+        
+        do {
+            
+            
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            
+            favItemArray = results as! [NSManagedObject]
+            
+//            for item in favItemArray {
+//                
+//                managedContext.deleteObject(item)
+//                
+//                    
+//                
+//            }
+//            favItemArray.removeAll()
+            
+            for item in favItemArray {
+                if let name = item.valueForKey("company_name") {
+                    let nameStr = item.valueForKey("company_name") as! String
+                    print(nameStr)
+                }
+            }
+            
+        } catch {
+            print("Error")
+        }
+
+    }
+    
+    
     
     override func viewDidLayoutSubviews() {
         scrollView.scrollEnabled = true
@@ -213,10 +296,182 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
     func webViewDidFinishLoad(webView: UIWebView) {
         let Symbol = detailText["Symbol"] as! String
         let jsStr = "drawHistory(\"" + Symbol + "\")"
-        print(jsStr)
         chart_View.stringByEvaluatingJavaScriptFromString(jsStr)
 
     }
+    
+    func checkInFav() -> Bool {
+       // let addDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = addDelegate.managedObjectContext
+        
+        let fetchRequest = NSFetchRequest(entityName: "FavEntity")
+        
+        do {
+            
+            
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            
+            favItemArray = results as! [NSManagedObject]
+            
+            for item in favItemArray {
+                if let name = item.valueForKey("company_name") {
+                    if detailText["Name"] as! String == item.valueForKey("company_name") as! String {
+                        return true
+                    }
+                    
+                }
+                
+            }
+            
+        } catch {
+            print("Error")
+        }
+        return false
+    }
+    @IBAction func favAction(sender: UIButton) {
+        if isFavCheck {
+            let img = UIImage(named:"icon/Star-50.png")! as UIImage
+            
+            self.favButton.setBackgroundImage(img, forState: UIControlState.Normal)
+            
+            //let addDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            
+            let managedContext = addDelegate.managedObjectContext
+            
+            let fetchRequest = NSFetchRequest(entityName: "FavEntity")
+            
+            do {
+                
+                
+                let results = try managedContext.executeFetchRequest(fetchRequest)
+                
+                favItemArray = results as! [NSManagedObject]
+                var index:Int = 0;
+                for item in favItemArray {
+                    if let name = item.valueForKey("company_name") {
+                        if detailText["Name"] as! String == item.valueForKey("company_name") as! String {
+                            managedContext.deleteObject(item)
+                            favItemArray.removeAtIndex(index)
+                            do {
+                                try managedContext.save()
+                            } catch {
+                                print("error")
+                            }
+                        }
+                        
+                    }
+                    index += 1
+                }
+                
+                for item in favItemArray {
+                    if let name = item.valueForKey("company_name") {
+                        var nameStr = item.valueForKey("company_name") as! String
+                        nameStr += "del"
+                        print(nameStr)
+                    }
+                }
+                
+            } catch {
+                print("Error")
+            }
+            isFavCheck = false
+            
+        
+        } else {
+            self.favButton.setBackgroundImage(UIImage(named:"icon/fb.png"), forState: UIControlState.Normal)
+            
+            //let addDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            
+            let managedContext = addDelegate.managedObjectContext
+            
+            let favEntity = NSEntityDescription.entityForName("FavEntity", inManagedObjectContext: managedContext)
+            
+            let favItem = NSManagedObject(entity: favEntity!, insertIntoManagedObjectContext: managedContext)
+            
+            
+            
+            
+            favItem.setValue(transferChange(detailText["Change"]as! Float, item1: detailText["ChangePercent"]as! Float), forKey: "change")
+            favItem.setValue(detailText["Name"] as! String, forKey: "company_name")
+            favItem.setValue(transferVol(detailText["MarketCap"] as! Float), forKey: "marketcap")
+            favItem.setValue(transferMoney(detailText["LastPrice"]as! Float), forKey: "price")
+            favItem.setValue(detailText["Symbol"] as! String, forKey: "symbol")
+            
+            if detailText["Change"]as! Float > 0 {
+                favItem.setValue(true, forKey: "updown")
+            }
+            else {
+                favItem.setValue(false, forKey: "updown")
+            }
+            
+            
+            
+            do {
+                
+                try managedContext.save()
+                
+            }
+            catch {
+                print(error)
+            }
+            
+            let fetchRequest = NSFetchRequest(entityName: "FavEntity")
+            
+            do {
+                
+                
+                let results = try managedContext.executeFetchRequest(fetchRequest)
+                
+                favItemArray = results as! [NSManagedObject]
+                
+                for item in favItemArray {
+                    if let name = item.valueForKey("company_name") {
+                        var nameStr = item.valueForKey("company_name") as! String
+                        nameStr += "Add"
+                        print(nameStr)
+                    }
+                    
+                }
+                
+            } catch {
+                print("Error")
+            }
+            //End add action
+            isFavCheck = true
+        }
+    }
+    
+   
+    @IBAction func shareFB(sender: AnyObject) {
+        let index:Int = 0;
+          let content:FBSDKShareLinkContent = FBSDKShareLinkContent()
+        //content.contentURL
+          let subNew = newText["d"]!
+          let subNewresult = subNew["results"]!
+          let subArray = subNewresult![index]
+          let link = subArray["Url"] as! String
+        let cURL = NSURL(string: link)
+    //let titleStr = subArray["Title"] as! String
+//        let desStr = subArray["Description"] as! String
+//        let srcStr = subArray["Source"] as! String
+//        let dateStr = subArray["Date"] as! String
+        let name:String = detailText["Name"] as! String
+        let symbol:String = detailText["Symbol"] as! String
+        let des = "Stock Information of " + name + "(" + symbol + ")"
+        let imgUrl = "http://chart.finance.yahoo.com/t?s=" + symbol + "&lang=en-US&width=400&height=300"
+        let URL = NSURL(string: imgUrl)
+        let price:String = transferMoney(detailText["LastPrice"]as! Float)
+        content.contentTitle = "Current Stock Price of " + name + " is " + price
+        content.contentURL = cURL
+        content.imageURL = URL
+
+        content.contentDescription = des
+        
+        FBSDKShareDialog.showFromViewController(self, withContent: content, delegate: nil)
+        
+    }
+    
     @IBAction func toggle(sender: UISegmentedControl) {
         print(Detail_Segment.selectedSegmentIndex)
         
