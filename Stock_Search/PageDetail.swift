@@ -517,10 +517,53 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
     
     func sharerDidCancel(sharer: FBSDKSharing!) {
         print("Share did cancel")
+        let alert = UIAlertController(
+        title:"Sharing to FaceBook Cancel",
+        message:nil,
+        preferredStyle: UIAlertControllerStyle.Alert)
+        
+        
+        alert.addAction(UIAlertAction(
+        title:"OK",
+        style: UIAlertActionStyle.Cancel,
+        handler: nil))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+
     }
     
     func sharer(sharer: FBSDKSharing!, didCompleteWithResults results: [NSObject : AnyObject]!) {
         print(results)
+        if results.isEmpty{
+            let alert = UIAlertController(
+            title:"You have not shared to FaceBook ",
+            message:nil,
+            preferredStyle: UIAlertControllerStyle.Alert)
+            
+            
+            alert.addAction(UIAlertAction(
+            title:"OK",
+            style: UIAlertActionStyle.Cancel,
+            handler: nil))
+            
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        else
+        {
+            let alert = UIAlertController(
+            title:"Successfully share to FaceBook!",
+            message:nil,
+            preferredStyle: UIAlertControllerStyle.Alert)
+            
+            
+            alert.addAction(UIAlertAction(
+            title:"OK",
+            style: UIAlertActionStyle.Cancel,
+            handler: nil))
+            
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+
     }
     
     func sharer(sharer: FBSDKSharing!, didFailWithError error: NSError!) {

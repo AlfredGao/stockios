@@ -17,6 +17,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     @IBOutlet weak var Stock_search_label: UILabel!
     @IBOutlet weak var favView: UITableView!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     let addDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     var favItemArray = [NSManagedObject]()
@@ -28,6 +29,18 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     var newArray = [String:AnyObject]()
     var searchFieldCheck: Bool! = false
     var symbolName = String()
+    
+    @IBOutlet weak var switchButton: UISwitch!
+    
+    //Timer
+    
+    var seconds = 0
+    var timer = NSTimer()
+    var timeIsOn = false
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -390,6 +403,36 @@ extension ViewController:AutocompleteDelegate{
         self.symbolName = symbolName
         
     }
+    // MARK Switch Action with timer
+    @IBAction func swicthAction(sender: AnyObject) {
+        if switchButton.on{
+            timer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: (#selector(ViewController.showActivityIndicator)), userInfo: nil, repeats: true)
+        
+        
+        }
+        else {
+            activityIndicator.stopAnimating()
+            timer.invalidate()
+        }
+    }
+    
+    // MARK refresh Action
+    @IBAction func refreshAction(sender: AnyObject) {
+        showActivityIndicator()
+    }
+    
+    
+    // Indicator show function
+    func showActivityIndicator() {
+        activityIndicator.startAnimating()
+        let delay = 1 * Double(NSEC_PER_SEC)
+        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(time, dispatch_get_main_queue()){
+            self.activityIndicator.stopAnimating()
+        }
+
+    }
+    
     
     func httpRequest(url:String) -> [String:AnyObject] {
         let connectUrl = NSURL(string: url)!
