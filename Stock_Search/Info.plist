@@ -89,5 +89,18 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIApplicationShortcutitems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutitemIconType</key>
+			<string>UIApplicationShortcutitemIconTypeShare</string>
+			<key>UIApplicationShortcutitemIconSubtitle</key>
+			<string>Get the fav list!</string>
+			<key>UIApplicationShortcutitemIconTitle</key>
+			<string>Get Quote</string>
+			<key>UIApplicationShortcutitemType</key>
+			<string>Get Quote</string>
+		</dict>
+	</array>
 </dict>
 </plist>

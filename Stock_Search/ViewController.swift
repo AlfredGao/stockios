@@ -9,6 +9,7 @@
 import UIKit
 import CCAutocomplete
 import CoreData
+import LocalAuthentication
 
 class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource{
 
@@ -30,6 +31,42 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        var fingerPrintboj = LAContext()
+        var fingerPrintError:NSError?
+        
+        fingerPrintboj.canEvaluatePolicy(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, error: &fingerPrintError)
+        
+        if fingerPrintError != nil {
+            
+        } else {
+            fingerPrintboj.evaluatePolicy(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, localizedReason: "Press finger to verify", reply: {(complete:Bool!, error:NSError?) -> Void in
+                if error != nil{
+                    print(error!.localizedDescription)
+                }else {
+                    if complete == true {
+                        print("Verification Successful")
+                    }
+                    else{
+                        print("Finger Print doesn't match")
+                    }
+                }
+            })
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         self.navigationController?.navigationBar.hidden = true
         
         let managedContext = addDelegate.managedObjectContext
@@ -115,8 +152,10 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         var favObjArray = [NSManagedObject]()
         favObjArray = favItemArray as! [NSManagedObject]
         if let name = favObjArray[indexPath.row].valueForKey("company_name") {
+            let marketStr:String = favObjArray[indexPath.row].valueForKey("marketcap") as! String
+            let marketCap:String = "Market Cap: " + marketStr
             favcell.changeLabel.text = favObjArray[indexPath.row].valueForKey("change") as! String
-            favcell.marketcapLabel.text = favObjArray[indexPath.row].valueForKey("marketcap") as! String
+            favcell.marketcapLabel.text = marketCap
             favcell.nameLabel.text = favObjArray[indexPath.row].valueForKey("company_name") as! String
             favcell.priceLabel.text = favObjArray[indexPath.row].valueForKey("price") as! String
             favcell.symbolLabel.text = favObjArray[indexPath.row].valueForKey("symbol") as! String
@@ -227,9 +266,24 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
        
-            var detailController: PageDetail = segue.destinationViewController as! PageDetail
+        if segue.identifier == "cellSeg" {
+            let detailController: PageDetail = segue.destinationViewController as! PageDetail
+            let index = self.favView.indexPathForSelectedRow
+            let currentCell = favView.cellForRowAtIndexPath(index!) as! favCell
+            let symbol:String! = currentCell.symbolLabel.text
+            let url:String = "http://socketsearch-1272.appspot.com/?api=lookup&symbol=" + symbol
+            let newUrl:String = "http://socketsearch-1272.appspot.com/index.php?symbol_name=" + symbol
+            detailArray = httpRequest(url)
+            newArray = httpRequest(newUrl)
+            print(detailArray)
             detailController.detailText = detailArray
             detailController.newText = newArray
+        } else {
+            let detailController: PageDetail = segue.destinationViewController as! PageDetail
+            detailController.detailText = detailArray
+            detailController.newText = newArray
+            
+        }
     }
     
     /*override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
@@ -267,7 +321,12 @@ extension ViewController:AutocompleteDelegate{
     }
     
     func autoCompleteItemsForSearchTerm(term: String) -> [AutocompletableOption] {
-        let url :String =  "http://socketsearch-1272.appspot.com/index.php?input=" + term
+        var url = String()
+        if term[term.startIndex] == " " || term[term.startIndex.advancedBy(1)] == " " || term[term.startIndex.advancedBy(2)] == " " {
+           url = "http://socketsearch-1272.appspot.com/index.php?input=hahaha"
+        } else {
+           url =  "http://socketsearch-1272.appspot.com/index.php?input=" + term
+        }
         let googleUrl = NSURL(string: url)!
         var jsonArray = [[String:String]]()
         let semaphore = dispatch_semaphore_create(0)

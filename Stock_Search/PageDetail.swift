@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import CoreData
-class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate, UIWebViewDelegate{
+class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate, UIWebViewDelegate,FBSDKSharingDelegate{
     
     
     var favItemArray = [NSManagedObject]()
@@ -99,13 +99,46 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
             cell.NewsMainTitle.text = titleStr
             cell.NewsSubTitle.text = desStr
             cell.NewsSrc.text = srcStr
-            cell.NewsDate.text = dateStr
+            cell.NewsDate.text = formateTime(dateStr)
             return cell
         }
         
         return defaultV
         
     }
+    
+    func formateTime(input_time: String) -> String {
+        let time = input_time
+        var timeArray = time.characters.split{$0 == "T"}.map(String.init)
+        //        This is date
+        var date = timeArray[0]
+        var hourArray = timeArray[1].characters.split{$0 == "Z"}.map(String.init)
+        //        This is Otiginal Hour and Min
+        let hourMin = hourArray[0]
+        //        This is original hour
+        var hourStr = hourMin.characters.split{$0 == ":"}.map(String.init)
+        var newHour = Int(hourStr[0])! - 7
+        var output = ""
+        if newHour < 10 && newHour > 0 {
+            output = date + " 0" + String(newHour) + ":" + hourStr[1] + ":" + hourStr[2]
+            //            print(output)
+            return output
+        }
+        else if newHour < 0 {
+            newHour = newHour + 24
+            var dateArray = date.characters.split{$0 == "-"}.map(String.init)
+            dateArray[2] = String(Int(dateArray[2])! - 1)
+            date = dateArray[0] + "-" + dateArray[1] + "-0" + dateArray[2]
+            output = date + " " + String(newHour) + ":" + hourStr[1] + ":" + hourStr[2]
+            //            print(output)
+            return output
+        }
+        else {
+            return date + " " + String(newHour) + ":" + hourStr[1] + ":" + hourStr[1]
+        }
+    }
+    
+    
     func transferTime(item:String) -> String {
         print(item)
         var spaceIndex = 1
@@ -194,7 +227,7 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
     }
     
     override func viewDidLoad() {
-            
+        print(detailText)
         self.title = detailText["Symbol"] as! String
         showDetailArray.append(detailText["Name"] as! String)
         showDetailArray.append(detailText["Symbol"] as! String)
@@ -211,7 +244,7 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
         chart_View.delegate = self
         chart_View.loadRequest(NSURLRequest(URL:NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("webView/stock_chart_app", ofType: "html")!)))
         
-        scrollView.contentSize = CGSizeMake(375, 1200)
+        scrollView.contentSize = CGSizeMake(370, 1000)
         
         var SymbolName = String()
         SymbolName = detailText["Symbol"] as! String
@@ -245,7 +278,7 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
     }
     
     
-    
+    // MARK: Clear core data programmatically (加了注释之后变成打印功能 取消注释是清空）
     func delAll() {
         let img = UIImage(named:"icon/Star-50.png")! as UIImage
         
@@ -283,25 +316,13 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
         } catch {
             print("Error")
         }
-
+        //end del function
     }
     
     
-    
-    override func viewDidLayoutSubviews() {
-        scrollView.scrollEnabled = true
-        scrollView.contentSize = CGSizeMake(400, 1200)
-    }
-    
-    func webViewDidFinishLoad(webView: UIWebView) {
-        let Symbol = detailText["Symbol"] as! String
-        let jsStr = "drawHistory(\"" + Symbol + "\")"
-        chart_View.stringByEvaluatingJavaScriptFromString(jsStr)
-
-    }
-    
+    // MARK: check whether the stock user get is in core data
     func checkInFav() -> Bool {
-       // let addDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        /* let addDelegate = UIApplication.sharedApplication().delegate as! AppDelegate */
         
         let managedContext = addDelegate.managedObjectContext
         
@@ -328,8 +349,25 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
             print("Error")
         }
         return false
+        //ENd check function
     }
+
+    
+    override func viewDidLayoutSubviews() {
+        scrollView.scrollEnabled = true
+        scrollView.contentSize = CGSizeMake(370, 1000)
+    }
+    
+    func webViewDidFinishLoad(webView: UIWebView) {
+        let Symbol = detailText["Symbol"] as! String
+        let jsStr = "drawHistory(\"" + Symbol + "\")"
+        chart_View.stringByEvaluatingJavaScriptFromString(jsStr)
+
+    }
+    
+    // MARK add favourite list buttion function
     @IBAction func favAction(sender: UIButton) {
+        /*if the stock user get is in core data set the proper icon image and action logical*/
         if isFavCheck {
             let img = UIImage(named:"icon/Star-50.png")! as UIImage
             
@@ -341,6 +379,7 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
             
             let fetchRequest = NSFetchRequest(entityName: "FavEntity")
             
+            /*do delete action*/
             do {
                 
                 
@@ -364,6 +403,7 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
                     index += 1
                 }
                 
+                //check function to see whether del works or not
                 for item in favItemArray {
                     if let name = item.valueForKey("company_name") {
                         var nameStr = item.valueForKey("company_name") as! String
@@ -379,6 +419,7 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
             
         
         } else {
+            /*if not do add logic action*/
             self.favButton.setBackgroundImage(UIImage(named:"icon/fb.png"), forState: UIControlState.Normal)
             
             //let addDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -405,7 +446,7 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
                 favItem.setValue(false, forKey: "updown")
             }
             
-            
+            /*add action*/
             
             do {
                 
@@ -415,6 +456,8 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
             catch {
                 print(error)
             }
+            
+            /*check function to see whether add works or not*/
             
             let fetchRequest = NSFetchRequest(entityName: "FavEntity")
             
@@ -468,8 +511,20 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
 
         content.contentDescription = des
         
-        FBSDKShareDialog.showFromViewController(self, withContent: content, delegate: nil)
+        FBSDKShareDialog.showFromViewController(self, withContent: content, delegate: self)
         
+    }
+    
+    func sharerDidCancel(sharer: FBSDKSharing!) {
+        print("Share did cancel")
+    }
+    
+    func sharer(sharer: FBSDKSharing!, didCompleteWithResults results: [NSObject : AnyObject]!) {
+        print(results)
+    }
+    
+    func sharer(sharer: FBSDKSharing!, didFailWithError error: NSError!) {
+        print(error.description)
     }
     
     @IBAction func toggle(sender: UISegmentedControl) {

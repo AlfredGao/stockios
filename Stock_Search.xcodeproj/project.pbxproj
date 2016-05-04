@@ -27,6 +27,7 @@
 		34C8DC901CD8956300F2B01F /* icon in Resources */ = {isa = PBXBuildFile; fileRef = 34C8DC8F1CD8956300F2B01F /* icon */; };
 		34D1422E1CD850B800FA10E6 /* webView in Resources */ = {isa = PBXBuildFile; fileRef = 34D1422D1CD850B800FA10E6 /* webView */; };
 		34D142401CD8735400FA10E6 /* detailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D1423F1CD8735400FA10E6 /* detailCell.swift */; };
+		34E6012F1CDA064500FD7DA8 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34E6012E1CDA064500FD7DA8 /* LocalAuthentication.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		34C8DC8F1CD8956300F2B01F /* icon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = icon; sourceTree = "<group>"; };
 		34D1422D1CD850B800FA10E6 /* webView */ = {isa = PBXFileReference; lastKnownFileType = folder; path = webView; sourceTree = "<group>"; };
 		34D1423F1CD8735400FA10E6 /* detailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = detailCell.swift; sourceTree = "<group>"; };
+		34E6012E1CDA064500FD7DA8 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		37D47B62038D8EB351CDD4E1 /* Pods-Stock_Search.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stock_Search.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stock_Search/Pods-Stock_Search.debug.xcconfig"; sourceTree = "<group>"; };
 		BB76C3F8A8CD02AC45E3F0F3 /* Pods-Stock_Search.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stock_Search.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stock_Search/Pods-Stock_Search.release.xcconfig"; sourceTree = "<group>"; };
 		F7CCC90CDB3A0D7F2E8E1BD9 /* Pods_Stock_Search.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stock_Search.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34E6012F1CDA064500FD7DA8 /* LocalAuthentication.framework in Frameworks */,
 				174210095613F5E9CB27A4E8 /* Pods_Stock_Search.framework in Frameworks */,
 				34245A561CD9BE12002252F6 /* FBSDKCoreKit.framework in Frameworks */,
 				34245A5B1CD9CE60002252F6 /* FBSDKShareKit.framework in Frameworks */,
@@ -182,6 +185,7 @@
 		E138CB5EA8E5A6C322E53843 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				34E6012E1CDA064500FD7DA8 /* LocalAuthentication.framework */,
 				34245A5A1CD9CE60002252F6 /* FBSDKShareKit.framework */,
 				34245A551CD9BE12002252F6 /* FBSDKCoreKit.framework */,
 				F7CCC90CDB3A0D7F2E8E1BD9 /* Pods_Stock_Search.framework */,
@@ -529,6 +533,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Stock_Search/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "usc.Stock-Search";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -544,6 +549,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Stock_Search/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "usc.Stock-Search";
 				PRODUCT_NAME = "$(TARGET_NAME)";
