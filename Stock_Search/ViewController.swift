@@ -462,8 +462,9 @@ extension ViewController:AutocompleteDelegate{
         for i in 0..<favItemArray.count {
             let symbol = favItemArray[i].valueForKey("symbol") as! String
             var url  =  String()
-            url = "http://socketsearch-1272.appspot.com/?api=lookup&symbol" + symbol
+            url = "http://socketsearch-1272.appspot.com/?api=lookup&symbol=" + symbol
             refreshTable(url, index: i)
+            self.favView.reloadData()
             
         }
     }
@@ -480,6 +481,7 @@ extension ViewController:AutocompleteDelegate{
                 do{
                     if let getString = NSString(data:data!, encoding: NSUTF8StringEncoding) {
                         jsonArray = try NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments)as! [String:AnyObject]
+                        //print(jsonArray)
 //                        let managedContext = self.addDelegate.managedObjectContext
 //                        
 //                        let fetchRequest = NSFetchRequest(entityName: "FavEntity")
@@ -504,7 +506,6 @@ extension ViewController:AutocompleteDelegate{
                         } catch {
                             print(NSError)
                         }
-                        self.favView.reloadData()
                     }
                 } catch {
                     print(error)
