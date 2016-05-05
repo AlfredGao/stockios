@@ -19,28 +19,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Stock Name or Symbol" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="6Lf-y0-eEn">
-                                <rect key="frame" x="-25" y="-30" width="97" height="30"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="Kvq-vt-kdV"/>
-                                    <constraint firstAttribute="width" constant="343" id="hmJ-bo-4nS"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="Kvq-vt-kdV"/>
-                                        <exclude reference="hmJ-bo-4nS"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular">
-                                    <mask key="constraints">
-                                        <include reference="Kvq-vt-kdV"/>
-                                        <include reference="hmJ-bo-4nS"/>
-                                    </mask>
-                                </variation>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stock Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mud-6V-QFi">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -193,6 +171,29 @@
                                     <rect key="frame" x="166" y="210" width="88" height="21"/>
                                 </variation>
                             </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Stock Name or Symbol" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="6Lf-y0-eEn">
+                                <rect key="frame" x="-25" y="-30" width="97" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="Kvq-vt-kdV"/>
+                                    <constraint firstAttribute="width" constant="343" id="hmJ-bo-4nS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Kvq-vt-kdV"/>
+                                        <exclude reference="hmJ-bo-4nS"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular" misplaced="YES">
+                                    <rect key="frame" x="16" y="124" width="343" height="32"/>
+                                    <mask key="constraints">
+                                        <include reference="Kvq-vt-kdV"/>
+                                        <include reference="hmJ-bo-4nS"/>
+                                    </mask>
+                                </variation>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.10196078431372549" green="0.89803921568627454" blue="0.53725490196078429" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -208,7 +209,6 @@
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="6Lf-y0-eEn"/>
                                 <exclude reference="Mud-6V-QFi"/>
                                 <exclude reference="LrE-xB-xrT"/>
                                 <exclude reference="TLi-j1-pUo"/>
@@ -217,6 +217,7 @@
                                 <exclude reference="ZPr-gh-ymC"/>
                                 <exclude reference="FXE-lZ-7Kb"/>
                                 <exclude reference="taS-gB-G98"/>
+                                <exclude reference="6Lf-y0-eEn"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="4hn-2W-vx6"/>
@@ -232,7 +233,6 @@
                         </variation>
                         <variation key="heightClass=regular">
                             <mask key="subviews">
-                                <include reference="6Lf-y0-eEn"/>
                                 <include reference="Mud-6V-QFi"/>
                                 <include reference="LrE-xB-xrT"/>
                                 <include reference="TLi-j1-pUo"/>
@@ -241,6 +241,7 @@
                                 <include reference="ZPr-gh-ymC"/>
                                 <include reference="FXE-lZ-7Kb"/>
                                 <include reference="taS-gB-G98"/>
+                                <include reference="6Lf-y0-eEn"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="4hn-2W-vx6"/>

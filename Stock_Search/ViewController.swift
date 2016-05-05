@@ -11,7 +11,7 @@ import CCAutocomplete
 import CoreData
 import LocalAuthentication
 
-class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource{
+class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate{
 
     @IBOutlet weak var Stock_search_field: UITextField!
     @IBOutlet weak var Stock_search_label: UILabel!
@@ -78,7 +78,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         
         
-        
+        self.Stock_search_field.delegate = self
         
         self.navigationController?.navigationBar.hidden = true
         
@@ -153,6 +153,14 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
     }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
+    
+    
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -271,6 +279,19 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             newArray = httpRequest(newUrl)
             print(detailArray)
             searchFieldCheck = true
+            if detailArray["Status"] as! String != "SUCCESS" {
+                let alert = UIAlertController(
+                    title:"Get Quote Failure, Pls try again!!!",
+                    message:nil,
+                    preferredStyle: UIAlertControllerStyle.Alert)
+                
+                alert.addAction(UIAlertAction(
+                    title:"OK",
+                    style: UIAlertActionStyle.Cancel,
+                    handler: nil))
+                
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
         }
         
         
