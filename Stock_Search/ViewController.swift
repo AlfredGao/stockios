@@ -170,9 +170,9 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let favcell = tableView.dequeueReusableCellWithIdentifier("favCell") as! favCell
         
-        var favObjArray = [NSManagedObject]()
+            var favObjArray = [NSManagedObject]()
         favObjArray = favItemArray as! [NSManagedObject]
-        if let name = favObjArray[indexPath.row].valueForKey("company_name") {
+//        if let name = favObjArray[indexPath.row].valueForKey("company_name") {
             let marketStr:String = favObjArray[indexPath.row].valueForKey("marketcap") as! String
             let marketCap:String = "Market Cap: " + marketStr
             favcell.changeLabel.text = favObjArray[indexPath.row].valueForKey("change") as! String
@@ -187,7 +187,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 favcell.changeLabel.backgroundColor = UIColor.redColor()
             }
             
-        }
+       // }
         
         return favcell
     }
@@ -440,6 +440,7 @@ extension ViewController:AutocompleteDelegate{
     // MARK refresh Action
     @IBAction func refreshAction(sender: AnyObject) {
         showActivityIndicator()
+        
     }
     
     
@@ -451,9 +452,111 @@ extension ViewController:AutocompleteDelegate{
         dispatch_after(time, dispatch_get_main_queue()){
             self.activityIndicator.stopAnimating()
         }
+        refreshTableforAll()
 
     }
     
+    
+    // MARK refreshfunction: refresh all the item in favItemArray then update core data
+    func refreshTableforAll(){
+        for i in 0..<favItemArray.count {
+            let symbol = favItemArray[i].valueForKey("symbol") as! String
+            var url  =  String()
+            url = "http://socketsearch-1272.appspot.com/?api=lookup&symbol" + symbol
+            refreshTable(url, index: i)
+            
+        }
+    }
+    
+    
+    func refreshTable(url:String, index:Int){
+        let connectUrl = NSURL(string: url)!
+        var jsonArray = [String:AnyObject]()
+        
+        
+        let session = NSURLSession.sharedSession()
+        session.dataTaskWithURL(connectUrl,completionHandler:
+            {( data: NSData?, response:NSURLResponse?, error:NSError?) -> Void in
+                do{
+                    if let getString = NSString(data:data!, encoding: NSUTF8StringEncoding) {
+                        jsonArray = try NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments)as! [String:AnyObject]
+//                        let managedContext = self.addDelegate.managedObjectContext
+//                        
+//                        let fetchRequest = NSFetchRequest(entityName: "FavEntity")
+//                        
+//                        do {
+//                            let results = try managedContext.executeFetchRequest(fetchRequest)
+//                            
+//                            self.favItemArray = results as! [NSManagedObject]
+//                            
+//                        } catch {
+//                            print(error)
+//                        }
+                        let updateItem = self.favItemArray[index]
+                        
+                        updateItem.setValue(self.transferChange(jsonArray["Change"]as! Float, item1: jsonArray["ChangePercent"]as! Float), forKey: "change")
+                        updateItem.setValue(self.transferVol(jsonArray["MarketCap"] as! Float), forKey: "marketcap")
+                        updateItem.setValue(self.transferMoney(jsonArray["LastPrice"]as! Float), forKey: "price")
+                        
+                        do {
+                            try updateItem.managedObjectContext?.save()
+                            
+                        } catch {
+                            print(NSError)
+                        }
+                        self.favView.reloadData()
+                    }
+                } catch {
+                    print(error)
+                }
+        }).resume()
+        
+        
+    }
+    func transferVol(item:Float) -> String {
+        if item < 1000000 {
+            print(item)
+            return String(item)
+        }
+        else if item >= 1000000 && item < 1000000000 {
+            let retval = item/1000000;
+            var retStr = String(format: "%.2f", retval)
+            retStr += " Million";
+            print(retStr)
+            return retStr
+        }
+        else {
+            let val = item/1000000000;
+            var retStr = String(format: "%.2f", val)
+            retStr += " Billion"
+            print(retStr)
+            return retStr
+        }
+    }
+    
+    func transferMoney(item:Float) -> String {
+        print(item)
+        let digitTwo = String(format:"%.2f",item)
+        print(digitTwo)
+        let retVal = "$ " + digitTwo
+        return retVal
+    }
+
+    
+    func transferChange(item:Float, item1: Float) -> String {
+        var retval = String()
+        let digitTwo = String(format: "%.2f", item)
+        let digitPercent = String(format: "%.2f", item1)
+        if item > 0{
+            retval = "+"+digitTwo+"("+digitPercent+"%)"
+        } else {
+            retval = digitTwo+"("+digitPercent+"%)"
+            
+        }
+        print(retval)
+        return retval
+    }
+
     
     func httpRequest(url:String) -> [String:AnyObject] {
         let connectUrl = NSURL(string: url)!
