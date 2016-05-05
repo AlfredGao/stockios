@@ -175,16 +175,17 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 //        if let name = favObjArray[indexPath.row].valueForKey("company_name") {
             let marketStr:String = favObjArray[indexPath.row].valueForKey("marketcap") as! String
             let marketCap:String = "Market Cap: " + marketStr
+       
             favcell.changeLabel.text = favObjArray[indexPath.row].valueForKey("change") as! String
             favcell.marketcapLabel.text = marketCap
             favcell.nameLabel.text = favObjArray[indexPath.row].valueForKey("company_name") as! String
             favcell.priceLabel.text = favObjArray[indexPath.row].valueForKey("price") as! String
             favcell.symbolLabel.text = favObjArray[indexPath.row].valueForKey("symbol") as! String
-            
+        
             if favObjArray[indexPath.row].valueForKey("updown") as! Bool == true {
-                favcell.changeLabel.backgroundColor = UIColor.greenColor()
+                favcell.changeLabel.backgroundColor = UIColor(red: 36/255,green: 161/255,blue: 77/255,alpha:1.0)
             } else {
-                favcell.changeLabel.backgroundColor = UIColor.redColor()
+                favcell.changeLabel.backgroundColor = UIColor(red: 223/255,green: 53/255, blue: 45/255,alpha:1.0)
             }
             
        // }
@@ -499,6 +500,14 @@ extension ViewController:AutocompleteDelegate{
                         updateItem.setValue(self.transferChange(jsonArray["Change"]as! Float, item1: jsonArray["ChangePercent"]as! Float), forKey: "change")
                         updateItem.setValue(self.transferVol(jsonArray["MarketCap"] as! Float), forKey: "marketcap")
                         updateItem.setValue(self.transferMoney(jsonArray["LastPrice"]as! Float), forKey: "price")
+                        
+                        if jsonArray["Change"]as! Float > 0 {
+                            updateItem.setValue(true, forKey: "updown")
+                        }
+                        else {
+                            updateItem.setValue(false, forKey: "updown")
+                        }
+
                         
                         do {
                             try updateItem.managedObjectContext?.save()
