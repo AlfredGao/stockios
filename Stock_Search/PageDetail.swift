@@ -50,7 +50,7 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let subNew = newText["d"]!
         let subNewresult = subNew["results"]!
-        let subArray = subNewresult![indexPath.row]
+        let subArray = (subNewresult as! NSArray)[indexPath.row]
         let link = subArray["Url"] as! String
         
         if let url = NSURL(string: link) {
@@ -90,7 +90,7 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
             let cell = New_View.dequeueReusableCellWithIdentifier("newsCell") as! newsCell
             let subNew = newText["d"]!
             let subNewresult = subNew["results"]!
-            let subArray = subNewresult![indexPath.row]
+            let subArray = (subNewresult as! NSArray)[indexPath.row]
             let titleStr = subArray["Title"] as! String
             let desStr = subArray["Description"] as! String
             let srcStr = subArray["Source"] as! String
@@ -492,7 +492,7 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
         //content.contentURL
           let subNew = newText["d"]!
           let subNewresult = subNew["results"]!
-          let subArray = subNewresult![index]
+          let subArray = (subNewresult as! NSArray)[index]
           let link = subArray["Url"] as! String
         let cURL = NSURL(string: link)
     //let titleStr = subArray["Title"] as! String
@@ -511,7 +511,15 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
 
         content.contentDescription = des
         
-        FBSDKShareDialog.showFromViewController(self, withContent: content, delegate: self)
+        //FBSDKShareDialog.showFromViewController(self, withContent: content, delegate: self)
+        let diaLog: FBSDKShareDialog = FBSDKShareDialog.init()
+        diaLog.delegate = self
+        diaLog.shareContent = content
+        diaLog.mode = FBSDKShareDialogMode.Automatic
+        if ( !diaLog.canShow()) {
+            diaLog.mode = FBSDKShareDialogMode.Browser
+        }
+        diaLog.show()
         
     }
     
