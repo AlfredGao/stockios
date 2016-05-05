@@ -43,7 +43,7 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
             return showDetailArray.count
         }
         else {
-            return 4
+            return showDetailArray.count
         }
     }
     
@@ -244,7 +244,7 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
         chart_View.delegate = self
         chart_View.loadRequest(NSURLRequest(URL:NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("webView/stock_chart_app", ofType: "html")!)))
         
-        scrollView.contentSize = CGSizeMake(370, 1000)
+        scrollView.contentSize = CGSizeMake(375, 1000)
         
         var SymbolName = String()
         SymbolName = detailText["Symbol"] as! String
@@ -355,7 +355,7 @@ class PageDetail : UIViewController, UITableViewDataSource, UITableViewDelegate,
     
     override func viewDidLayoutSubviews() {
         scrollView.scrollEnabled = true
-        scrollView.contentSize = CGSizeMake(370, 1000)
+        scrollView.contentSize = CGSizeMake(375, 1000)
     }
     
     func webViewDidFinishLoad(webView: UIWebView) {
